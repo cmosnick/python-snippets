@@ -1,0 +1,2 @@
+username = 'username'
+keyringProfile = 'system'
