@@ -1,3 +1,6 @@
+# Test the insertion of a simple feature into 
+# an ArcGIS Online feature layer
+
 import sys
 import os
 from arcgis.gis import GIS
@@ -9,7 +12,7 @@ def findLayerInItem(agolItem, layerName):
     return None
 
 def insertFeature():
-    # region: ArcGIS Online Authentication
+    # ArcGIS Online Authentication
     print("...Authenticating with ArcGIS Online")
     agolURL = 'agolurl'
     agolUsername = 'username'
@@ -17,15 +20,15 @@ def insertFeature():
 
     gis = GIS(agolURL, agolUsername, agolPwd)
     print("...Connected to ArcGIS Online")
-    # endregion
 
-    # region: update map layer
+    # Find arcgis online item and layer
     itemId = config.get('ArcgisOnline', 'agolItemId')
     agolItem = gis.content.get(itemId)
     layerName = config.get('ArcgisOnline', 'agolLayerName')
     agolLayer = findLayerInItem(agolItem, layerName)
 
 
+    # Create feature to insert
     insertFeature = {
         'attributes':
         {
@@ -45,4 +48,3 @@ def insertFeature():
 
 if __name__ == '__main__':
     insertFeature()
-

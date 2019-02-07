@@ -1,3 +1,5 @@
+# Script to pretty print a timestamp
+
 import sys
 import datetime
 

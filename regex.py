@@ -1,5 +1,8 @@
-import re
+# Use a regex to strip all html tag attributes, up to 6 instances of tags
+# Input: <div class="classname"><p class="classname" style="stylestuffhere">helloworld</p></div>
+# Output: <div><p>helloworld</p></div>
 
+import re
 
 badstring = '<div class="classname"><p class="classname" style="stylestuffhere">helloworld</p></div>'
 print(badstring)

@@ -1,3 +1,12 @@
+# Run 2 scenarios to convert lat/long into arcgis geometry objects using the arcgis geometry engine:
+# - Convert 10 geometries 1 at a time
+# - Convert 10 geometries as a batch in 1 request
+# 
+# Results:
+# - Time for single geometries: 77.449588 s
+# - Time for batch geometries:   6.457343 s
+# 
+
 import arcgis
 from arcgis import GIS
 import random
@@ -24,6 +33,12 @@ def main():
     # Connect to gis
     gis = GIS()
 
+    # Convert in batch
+    astarttime = time.time()
+    allGeoms = arcgis.geometry.project(geometries=points, in_sr=4326, out_sr=3857)
+    aendtime = time.time()
+    print(allGeoms)
+
     # Convert one by one
     singleGeoms = []
     sstarttime = time.time()
@@ -35,13 +50,7 @@ def main():
     print(singleGeoms)
 
 
-    # Convert in batch
-    astarttime = time.time()
-    allGeoms = arcgis.geometry.project(geometries=points, in_sr=4326, out_sr=3857)
-    aendtime = time.time()
-    print(allGeoms)
-
-    Compare order of elements
+    # Compare order of elements
     for a, b in zip(singleGeoms, allGeoms):
         if (a != b):
             print("a does not equal b")
